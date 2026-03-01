@@ -1,0 +1,30 @@
+class University:
+    def __init__ (self):
+        self.students = {}
+        self.courses = {}
+    
+    def add_course(self, course_code, credits):
+        if course_code not in self.courses:
+            course = Course(course_code, credits)
+            self.courses[course_code] = course
+
+        return self.courses[course_code]
+
+    def add_student(self, student_id, name):
+        if student_id not in self.students:
+            student = Student(student_id, name)
+            self.students[student_id] = student
+        
+        return self.students[student_id]
+    
+    def get_student(self, student_id):
+        return self.students.get(student_id)
+    
+    def get_course(self, course_code):
+        return self.courses.get(course_code)
+
+    def get_course_enrollment(self, course_code):
+        course = self.courses.get(course_code)
+        if course is None:
+            return None
+        return course.get_student_count()
