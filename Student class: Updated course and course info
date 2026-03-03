@@ -1,0 +1,8 @@
+def get_courses(self):
+        return list(self.courses.keys())  '''changed it so it actually returns course objects and not just a dict'''
+    
+    def get_course_info(self):  
+        Course_info = []
+        for course, grade in self.courses.items():
+            Course_info.append((course.course_code, grade, course.credits))
+        return Course_info
