@@ -1,0 +1,5 @@
+def get_students_in_cousre(self, course_code)
+        course = self.get_course(course_code)
+        if course:
+            return course.students
+        return None
