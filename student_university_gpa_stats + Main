@@ -1,0 +1,47 @@
+def get_university_gpa_stats(self):
+        students_GPAs = []
+
+        for student in self.students.values():
+            students_GPAs.append(student.calculate_gpa())
+
+        if not students_GPAs:
+            return None
+
+        mean = sum(students_GPAs) / len(students_GPAs)
+
+        students_GPAs.sort()
+        n = len(students_GPAs)
+
+        if n % 2 == 1:
+            median = students_GPAs[n // 2]
+        else:
+            median = (students_GPAs[n // 2 - 1] + students_GPAs[n // 2]) / 2
+
+        return {
+            "mean": round(mean, 2),
+            "median": round(median, 2)
+        }
+    
+
+    
+if __name__ == "__main__":
+    u = University() 
+    u.load_courses_from_csv()
+    u.load_students_from_csv()
+
+
+    print("Total students:", len(u.students))
+    print("Total courses:", len(u.courses))
+
+    student = u.get_student("STU00001")
+    print("Student name:", student.name)
+    print("GPA:", student.calculate_gpa())
+    print("Student courses:", student.get_course_info())
+
+    print("CSE2050 enrollment:", u.get_course_enrollment("CSE2050"))
+    
+    stats = u.get_course_stats("CSE2050")
+    print("CSE2050 statistics:", stats)
+
+    gpa_stats = u.get_university_gpa_stats()
+    print("University Student GPA statistics:", gpa_stats)
